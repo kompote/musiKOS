@@ -1,7 +1,7 @@
 #include "Coucou.hpp"
 #include <iostream>
 
-Coucou::Coucou() : button("Coucou les gens !")
+Coucou::Coucou() : Module(), button("Coucou les gens !")
 {
   button.signal_clicked().connect(sigc::mem_fun(*this,&Coucou::on_click));
 

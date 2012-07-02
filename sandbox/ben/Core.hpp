@@ -2,9 +2,15 @@
 #include <gtkmm/hvbox.h>
 #include <gtkmm/button.h>
 #include <gtkmm/label.h>
+#include <string>
+#include <fstream>
+#include <iostream>
+#include <cstdlib>
+#include <map>
 
-#include "Hello.hpp"
-#include "Coucou.hpp"
+#include "ModuleFactory.hpp"
+
+using namespace std;
 
 class Core : public Gtk::Window
 {
@@ -15,13 +21,13 @@ class Core : public Gtk::Window
 
   protected:
 
-		void set_module(Glib::ustring data);
+		void SetModule(Glib::ustring data);
+		void LoadModules(void);
+		void LoadMenu(void);
 
 		Gtk::HBox hbox;
 		Gtk::VBox menu;
-		Gtk::Button button1;
-		Gtk::Button button2;
 		Gtk::Label label;
-		Hello hello;
-		Coucou coucou;
+		std::map<string,Module*> modules;
+		Module* currentModule;
 };

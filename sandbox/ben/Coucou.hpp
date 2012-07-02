@@ -1,14 +1,14 @@
 #ifndef COUCOU_H
 #define COUCOU_H
 
-#include <gtkmm/frame.h>
 #include <gtkmm/button.h>
+#include "Module.hpp"
 
-class Coucou : public Gtk::Frame
+class Coucou : public Module
 {
   public:
     Coucou();
-    virtual ~Coucou();
+    ~Coucou();
 
   protected:
     // Gestionnaire de signal : clic

@@ -7,5 +7,7 @@ int main(int argc, char* argv[])
 
   Core core;
 
+	std::cout << "Core OK" << std::endl;
+
   return app->run(core);
 }

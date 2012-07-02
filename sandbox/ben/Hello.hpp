@@ -1,14 +1,14 @@
 #ifndef HELLOWORLD_H
 #define HELLOWORLD_H
 
-#include <gtkmm/frame.h>
 #include <gtkmm/button.h>
+#include "Module.hpp"
 
-class Hello : public Gtk::Frame
+class Hello : public Module
 {
   public:
     Hello();
-    virtual ~Hello();
+    ~Hello();
 
   protected:
     // Gestionnaire de signal : clic

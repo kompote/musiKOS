@@ -1,7 +1,7 @@
 #include "Hello.hpp"
 #include <iostream>
 
-Hello::Hello() : button("Hello world !")
+Hello::Hello() : Module(), button("Hello world !")
 {
   button.signal_clicked().connect(sigc::mem_fun(*this,&Hello::on_click));
 
