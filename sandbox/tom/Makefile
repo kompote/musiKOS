@@ -1,4 +1,4 @@
-CFLAGS = `pkg-config --cflags gtkmm-3.0`
+CFLAGS = `pkg-config --cflags gtkmm-3.0` -Wall -pedantic
 LFLAGS = `pkg-config --libs gtkmm-3.0`
 SRC = src/
 BIN = bin/
