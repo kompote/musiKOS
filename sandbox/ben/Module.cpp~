@@ -2,7 +2,7 @@
 
 Module::Module()
 {
-	set_size_request(950,600);
+	set_size_request(900,600);
 }
 
 Module::~Module()

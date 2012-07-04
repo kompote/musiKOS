@@ -70,7 +70,6 @@ void Core::SetModule(Glib::ustring data)
 	container.put(menu,0,100);
 
 	show_all_children();
-	menu.show_all_children();
 }
 
 Core::~Core()
