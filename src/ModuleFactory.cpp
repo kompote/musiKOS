@@ -13,6 +13,9 @@ Module* ModuleFactory::Create(std::string name)
 	if(name.compare("Audiotheque")==0)
 		return new Audiotheque();
 
+	if(name.compare("player")==0)
+		return new Player();
+
 	return NULL;
 }
 
