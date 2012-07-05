@@ -1,13 +1,13 @@
 #include "Core.hpp"
 
-Core::Core() : hbox(false,10),menu(true,5),label("Accueil")
+Core::Core() : menu(true,5),label("Accueil")
 {
 	set_default_size(1024,600);
-	set_border_width(20);
+	set_border_width(0);
 	set_decorated(false);
 	set_has_resize_grip(false);
 
-	label.set_size_request(900,600);
+	label.set_size_request(950,600);
 
 	LoadModules();
 	cout << "Modules loaded" << endl;
@@ -15,10 +15,10 @@ Core::Core() : hbox(false,10),menu(true,5),label("Accueil")
 	LoadMenu();
 	cout << "Menu loaded" << endl;
 
-	hbox.pack_start(menu);
-	hbox.pack_start(label);
+	container.put(label,74,0);
+	container.put(menu,0,100);
 
-	add(hbox);
+	add(container);
 
 	show_all_children();
 }
@@ -47,6 +47,8 @@ void Core::LoadModules()
 
 void Core::LoadMenu()
 {
+	menu.set_size_request(120,400);
+
 	std::map<string,Module*>::iterator it = modules.begin();
 	Gtk::Button* button;
 
@@ -60,14 +62,15 @@ void Core::LoadMenu()
 
 void Core::SetModule(Glib::ustring data)
 {
-	
-	hbox.remove(*(hbox.get_children()[1]));
+	std::vector<Gtk::Widget*> children = container.get_children();
+	for(std::vector<Gtk::Widget*>::iterator it=children.begin(); it!=children.end(); it++)
+		container.remove(**it);
 
-	if(hbox.get_children().size()==1) {
-		hbox.pack_start(*modules[data]);
-	}
+	container.put(*modules[data],74,0);
+	container.put(menu,0,100);
 
 	show_all_children();
+	menu.show_all_children();
 }
 
 Core::~Core()

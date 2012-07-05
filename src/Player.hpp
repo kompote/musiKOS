@@ -15,16 +15,18 @@ class Player : public Module
   void addMedia(const char*);
   void createPlaylist(const char * = NULL);
   int current_idx;
+  static void vlcEvent(const libvlc_event_t* event, Player* miaou);
 
 protected:
   // Gestionnaire de signal : clic
-  void on_click();
+  void play();
   void next();
   void stop();
   
 private:
   void getCurrentMeta();
   void showMeta();
+  
 
   // Widgets membres
 
@@ -36,9 +38,13 @@ private:
   Gtk::Label title_lbl;
 
   Gtk::Button button1, button2, button3;
+  
+  Gtk::Table table;
+
   Glib::RefPtr<Gdk::Pixbuf> pixbuf;
   Gtk::Image image;
   Gtk::Grid grid;
+  
 
   char* metaTitle;
   char* metaArtist;

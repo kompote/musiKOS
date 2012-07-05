@@ -1,5 +1,6 @@
 #include <gtkmm/window.h>
 #include <gtkmm/hvbox.h>
+#include <gtkmm/fixed.h>
 #include <gtkmm/button.h>
 #include <gtkmm/label.h>
 #include <string>
@@ -25,7 +26,7 @@ class Core : public Gtk::Window
 		void LoadModules(void);
 		void LoadMenu(void);
 
-		Gtk::HBox hbox;
+		Gtk::Fixed container;
 		Gtk::VBox menu;
 		Gtk::Label label;
 		std::map<string,Module*> modules;
