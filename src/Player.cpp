@@ -10,11 +10,11 @@ libvlc_media_t *m;
 libvlc_event_manager_t *m_eventMgr;
 
 
-Player::Player() : Module(), button5("Play"), artist_lbl("None"), album_lbl("None"), title_lbl("None"), button1("Stop"), button2("Next"), button3("rtstst"), table()
+Player::Player() : Module(), button5("Play"), artist_lbl("None"), album_lbl("None"), title_lbl("None"), button1("Stop"), button2("Next")
 {
   printf("Loading Player Module...");
   current_idx = -1;
-
+  playlist_size = 0;
   button5.signal_clicked().connect(sigc::mem_fun(*this,&Player::play));
   button1.signal_clicked().connect(sigc::mem_fun(*this,&Player::stop));
   button2.signal_clicked().connect(sigc::mem_fun(*this,&Player::next));
@@ -25,9 +25,6 @@ Player::Player() : Module(), button5("Play"), artist_lbl("None"), album_lbl("Non
 
   artist_lbl.set_size_request(624,-1);
 
-
-  table.attach(button3,0,1,0,1);
-
   grid.attach(artist_lbl,0,0,2,1);
   grid.attach(album_lbl,0,1,2,1);
   grid.attach(title_lbl,0,2,2,1);
@@ -35,7 +32,7 @@ Player::Player() : Module(), button5("Play"), artist_lbl("None"), album_lbl("Non
   grid.attach(button5,0,3,5,1);
   grid.attach(button1,0,4,5,1);
   grid.attach(button2,0,5,5,1);
-  grid.attach(table,0,6,5,5);
+  grid.attach(playlist_view,0,6,5,5);
 
   show_all_children();
 
@@ -61,9 +58,6 @@ Player::Player() : Module(), button5("Play"), artist_lbl("None"), album_lbl("Non
 void Player::next() {
 
  libvlc_media_list_player_next(mlp);
-
- // getCurrentMeta();
- // showMeta();
 
 }
 
@@ -108,6 +102,9 @@ void Player::addMedia(const char *s) {
 
   libvlc_media_list_add_media(playlist,m);
   libvlc_media_release (m);
+  playlist_size++;
+  playlist_view.addLine(playlist_size,t,ar,al);
+
 }
 
 void Player::createPlaylist(const char *) {
@@ -122,19 +119,14 @@ void Player::vlcEvent(const libvlc_event_t* event, Player* miaou) {
   miaou->current_idx++;
   miaou->getCurrentMeta();
   miaou->showMeta();
+  miaou->playlist_view.select(miaou->current_idx);
 }
 
-void Player::play()
-{
-
+void Player::play() {
   libvlc_media_list_player_play (mlp);
-  //  getCurrentMeta();
-  //  showMeta();
-    
 }
 
 void Player::stop() {
-
  libvlc_media_list_player_stop(mlp);
 
 }
@@ -142,8 +134,4 @@ void Player::stop() {
 
 Player::~Player()
 {
-
-  //   libvlc_media_player_release (mp);
-  //  libvlc_release (inst);
-
 }

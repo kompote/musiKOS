@@ -7,8 +7,8 @@ GCC = colorgcc
 
 all: musikos
 
-musikos: ${BIN}main.o ${BIN}Core.o ${BIN}Module.o ${BIN}Hello.o ${BIN}Coucou.o ${BIN}ModuleFactory.o ${BIN}Player.o ${BIN}Audiotheque.o
-	${GCC} -o musikos ${BIN}main.o ${BIN}Core.o ${BIN}Module.o ${BIN}Hello.o ${BIN}Coucou.o ${BIN}ModuleFactory.o ${BIN}Player.o ${BIN}Audiotheque.o ${LFLAGS} -lvlc
+musikos: ${BIN}main.o ${BIN}Core.o ${BIN}Module.o ${BIN}Hello.o ${BIN}Coucou.o ${BIN}ModuleFactory.o ${BIN}Player.o ${BIN}Audiotheque.o ${BIN}PlayerPlaylist.o
+	${GCC} -o musikos ${BIN}main.o ${BIN}Core.o ${BIN}Module.o ${BIN}Hello.o ${BIN}Coucou.o ${BIN}ModuleFactory.o ${BIN}Player.o ${BIN}Audiotheque.o ${BIN}PlayerPlaylist.o ${LFLAGS} -lvlc
 
 ${BIN}main.o: ${SRC}main.cpp 
 	${GCC} -o ${BIN}main.o -c ${SRC}main.cpp ${CFLAGS}
@@ -25,7 +25,7 @@ ${BIN}Hello.o: ${SRC}Hello.cpp ${SRC}Hello.hpp
 ${BIN}Coucou.o: ${SRC}Coucou.cpp ${SRC}Coucou.hpp
 	${GCC} -o ${BIN}Coucou.o -c ${SRC}Coucou.cpp ${CFLAGS}
 
-${BIN}Player.o: ${SRC}Player.cpp ${SRC}Player.hpp
+${BIN}Player.o: ${SRC}Player.cpp ${SRC}Player.hpp ${SRC}PlayerPlaylist.hpp
 	${GCC} -o ${BIN}Player.o -c ${SRC}Player.cpp ${CFLAGS}
 
 ${BIN}Audiotheque.o: ${SRC}Audiotheque.hpp ${SRC}Audiotheque.cpp
@@ -33,6 +33,9 @@ ${BIN}Audiotheque.o: ${SRC}Audiotheque.hpp ${SRC}Audiotheque.cpp
 
 ${BIN}ModuleFactory.o: ${SRC}ModuleFactory.cpp
 	${GCC} -o ${BIN}ModuleFactory.o -c ${SRC}ModuleFactory.cpp ${CFLAGS}
+
+${BIN}PlayerPlaylist.o: ${SRC}PlayerPlaylist.cpp ${SRC}PlayerPlaylist.hpp
+	${GCC} -o ${BIN}PlayerPlaylist.o -c ${SRC}PlayerPlaylist.cpp ${CFLAGS}
 
 clean:
 	rm -f ${BIN}*
